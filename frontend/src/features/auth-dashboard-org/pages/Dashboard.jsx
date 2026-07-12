@@ -1,131 +1,91 @@
-function Dashboard() {
+import { useEffect, useMemo, useState } from 'react';
+import { getCurrentUser, logoutUser } from '../services/authService';
+
+function Dashboard({ onLogout }) {
+  const [user, setUser] = useState(null);
+  const [organization, setOrganization] = useState(null);
+
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+    setUser(currentUser);
+
+    try {
+      const savedOrg = localStorage.getItem('assetflow-organization');
+      setOrganization(savedOrg ? JSON.parse(savedOrg) : null);
+    } catch (error) {
+      console.error('Unable to load organization data:', error);
+    }
+  }, []);
+
+  const stats = useMemo(() => ({
+    employees: 150,
+    departments: 8,
+    categories: 12,
+    assets: 325,
+  }), []);
+
+  const handleLogout = () => {
+    logoutUser();
+    if (onLogout) onLogout();
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
-
-      {/* Navbar */}
       <div className="bg-white shadow px-8 py-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Enterprise Asset Management</h1>
-
-        <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+        <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
           Logout
         </button>
       </div>
 
-      <div className="flex">
-
-        {/* Sidebar */}
-        <div className="w-64 bg-slate-800 text-white min-h-screen p-6">
-
-          <h2 className="text-xl font-bold mb-8">
-            Dashboard
-          </h2>
-
+      <div className="flex flex-col lg:flex-row">
+        <div className="w-full lg:w-64 bg-slate-800 text-white min-h-screen p-6">
+          <h2 className="text-xl font-bold mb-8">Dashboard</h2>
           <ul className="space-y-5">
-
-            <li className="cursor-pointer hover:text-blue-300">
-              Dashboard
-            </li>
-
-            <li className="cursor-pointer hover:text-blue-300">
-              Organization
-            </li>
-
-            <li className="cursor-pointer hover:text-blue-300">
-              Departments
-            </li>
-
-            <li className="cursor-pointer hover:text-blue-300">
-              Categories
-            </li>
-
-            <li className="cursor-pointer hover:text-blue-300">
-              Employees
-            </li>
-
+            <li className="cursor-pointer hover:text-blue-300">Dashboard</li>
+            <li className="cursor-pointer hover:text-blue-300">Organization</li>
+            <li className="cursor-pointer hover:text-blue-300">Departments</li>
+            <li className="cursor-pointer hover:text-blue-300">Categories</li>
+            <li className="cursor-pointer hover:text-blue-300">Employees</li>
           </ul>
-
         </div>
-
-        {/* Main Content */}
 
         <div className="flex-1 p-8">
-
-          <h2 className="text-3xl font-bold mb-8">
-            Welcome Admin 👋
-          </h2>
-
-          {/* Cards */}
+          <h2 className="text-3xl font-bold mb-2">Welcome {user?.name || 'Admin'} 👋</h2>
+          <p className="text-gray-600 mb-8">
+            {organization?.name ? `Managing ${organization.name}` : 'Set up your organization details to get started.'}
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-
             <div className="bg-white rounded-xl shadow p-6">
-              <h3 className="text-gray-500">
-                Total Employees
-              </h3>
-
-              <p className="text-3xl font-bold mt-3">
-                150
-              </p>
+              <h3 className="text-gray-500">Total Employees</h3>
+              <p className="text-3xl font-bold mt-3">{stats.employees}</p>
             </div>
-
             <div className="bg-white rounded-xl shadow p-6">
-              <h3 className="text-gray-500">
-                Departments
-              </h3>
-
-              <p className="text-3xl font-bold mt-3">
-                8
-              </p>
+              <h3 className="text-gray-500">Departments</h3>
+              <p className="text-3xl font-bold mt-3">{stats.departments}</p>
             </div>
-
             <div className="bg-white rounded-xl shadow p-6">
-              <h3 className="text-gray-500">
-                Categories
-              </h3>
-
-              <p className="text-3xl font-bold mt-3">
-                12
-              </p>
+              <h3 className="text-gray-500">Categories</h3>
+              <p className="text-3xl font-bold mt-3">{stats.categories}</p>
             </div>
-
             <div className="bg-white rounded-xl shadow p-6">
-              <h3 className="text-gray-500">
-                Assets
-              </h3>
-
-              <p className="text-3xl font-bold mt-3">
-                325
-              </p>
+              <h3 className="text-gray-500">Assets</h3>
+              <p className="text-3xl font-bold mt-3">{stats.assets}</p>
             </div>
-
           </div>
-
-          {/* Recent Activity */}
 
           <div className="bg-white rounded-xl shadow mt-10 p-6">
-
-            <h3 className="text-xl font-bold mb-4">
-              Recent Activity
-            </h3>
-
+            <h3 className="text-xl font-bold mb-4">Recent Activity</h3>
             <ul className="space-y-3">
-
-              <li>✔ Employee Rahul added.</li>
-
-              <li>✔ New Department created.</li>
-
+              <li>✔ {user?.name || 'Admin'} signed in.</li>
+              <li>✔ Organization setup updated.</li>
               <li>✔ Category "Laptop" added.</li>
-
-              <li>✔ Organization details updated.</li>
-
+              <li>✔ New department created.</li>
             </ul>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 }
