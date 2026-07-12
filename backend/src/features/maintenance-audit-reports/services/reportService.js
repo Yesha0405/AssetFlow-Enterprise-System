@@ -43,6 +43,15 @@ class ReportService {
         }
         const affectedRows = await reportRepository.updateRequestStatus(requestId, status);
         if (affectedRows === 0) throw new Error('Maintenance request not found');
+
+        // --- Cross-Module Integration ---
+        // Update the core Assets table based on maintenance request status
+        if (status === 'Approved') {
+            await reportRepository.updateAssetLifecycleStatus(requestId, 'Under Maintenance');
+        } else if (status === 'Resolved') {
+            await reportRepository.updateAssetLifecycleStatus(requestId, 'Available');
+        }
+
         return { message: 'Status updated successfully', request_id: requestId, new_status: status };
     }
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Base URL for the maintenance reports API
 // Adjust this if your backend is hosted elsewhere or uses a different base path (e.g. /api/reports)
-const API_BASE_URL = '/api/reports'; 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/reports'; 
 
 export const fetchMaintenanceRequests = async () => {
     try {
