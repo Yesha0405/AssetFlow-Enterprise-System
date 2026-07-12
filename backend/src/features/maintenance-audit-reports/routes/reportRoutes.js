@@ -14,4 +14,8 @@ router.post('/maintenance-requests', reportController.createRequest);
 // Update a maintenance request status
 router.patch('/maintenance-requests/:id/status', reportController.updateStatus);
 
+// GET /api/reports/analytics
+// Retrieve analytics for the dashboard
+router.get('/analytics', reportController.getAnalytics);
+
 module.exports = router;
