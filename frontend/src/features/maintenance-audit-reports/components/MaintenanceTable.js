@@ -1,7 +1,12 @@
 import React from 'react';
 
 const MaintenanceTable = ({ requests, isLoading, error, onStatusChange }) => {
-    if (isLoading) return <div className="state-message">Loading maintenance requests...</div>;
+    if (isLoading) return (
+        <div className="spinner-container">
+            <div className="spinner"></div>
+            <div>Loading maintenance requests...</div>
+        </div>
+    );
     if (error) return <div className="state-message state-message-error">Error: {error}</div>;
     if (!requests || requests.length === 0) return <div className="state-message">No maintenance requests found.</div>;
 
