@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-
+import ReportsDashboard from './features/maintenance-audit-reports/components/ReportsDashboard';
 import Login from "./features/auth-dashboard-org/pages/login";
 import Signup from "./features/auth-dashboard-org/pages/signup";
 import Dashboard from "./features/auth-dashboard-org/pages/Dashboard";
@@ -30,7 +30,7 @@ function App() {
             )
           }
         />
-
+        <Route path="/reports" element={<ReportsDashboard />} />
         <Route
           path="/signup"
           element={
