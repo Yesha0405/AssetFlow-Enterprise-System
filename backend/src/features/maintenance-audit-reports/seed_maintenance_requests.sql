@@ -1,0 +1,17 @@
+INSERT INTO Maintenance_Requests (asset_id, requested_by, issue_description, priority_level, status) VALUES
+('HVAC-001', 'EMP-102', 'The HVAC unit on the 3rd floor is making a loud grinding noise and is completely offline.', 'High', 'Pending'),
+('SRV-045', 'IT-008', 'Server rack 4 cooling fan is broken, temperature is rising.', 'High', 'Assigned'),
+('PLB-012', 'EMP-205', 'Massive water leak in the main lobby restroom. Water is everywhere, slip hazard!', 'Critical', 'In Progress'),
+('LGT-089', 'EMP-304', 'Flickering lights in conference room B. Might just be a loose bulb.', 'Low', 'Resolved'),
+('ELC-002', 'FAC-011', 'Exposed electrical wiring near the emergency exit. Major safety hazard.', 'Critical', 'Approved'),
+('FRK-019', 'WHS-033', 'Forklift battery is not holding a charge, needs replacement.', 'Medium', 'Pending'),
+('DOOR-004', 'SEC-002', 'Main entrance automatic door is stuck open, security issue.', 'High', 'Assigned'),
+('HVAC-002', 'EMP-110', 'Ventilation in the cafeteria smells like smoke. Possible fire risk?', 'Critical', 'In Progress'),
+('PRN-055', 'EMP-401', 'Printer on the 2nd floor is out of toner and paper jams frequently.', 'Low', 'Pending'),
+('PMP-008', 'FAC-022', 'Sump pump in the basement is broken. Water starting to pool.', 'High', 'Approved'),
+('FLR-003', 'EMP-505', 'Chemical spill in the lab area. Needs immediate cleanup.', 'Critical', 'Assigned'),
+('LGT-102', 'EMP-210', 'Parking lot light pole 4 is completely offline.', 'High', 'Pending'),
+('WIN-015', 'EMP-312', 'Window in the breakroom won''t close fully, drafts coming in.', 'Medium', 'Resolved'),
+('ELV-001', 'SEC-005', 'Elevator A is making a weird sound but still functioning.', 'Medium', 'Pending'),
+('HVAC-005', 'EMP-150', 'AC in the server room is offline. Temperatures rising rapidly!', 'High', 'In Progress'),
+('SFT-001', 'FAC-005', 'Fire extinguisher in hall C is missing its safety pin.', 'Critical', 'Approved');

@@ -11,32 +11,30 @@ class ReportService {
         if (!requestData.asset_id || !requestData.requested_by || !requestData.issue_description) {
             throw new Error('Missing required fields: asset_id, requested_by, issue_description');
         }
-        
+
         // --- HACKATHON WOW FACTOR: Smart Triage System ---
         // Automatically escalate priorities based on critical keywords in the description
-        const criticalKeywords = ['fire', 'leak', 'smoke', 'spill', 'broken pipe', 'hazard', 'safety'];
-        const highKeywords = ['power', 'offline', 'broken', 'damaged'];
-        
+        const criticalKeywords = ['fire', 'leak', 'hazard'];
+        const highKeywords = ['broken', 'offline'];
+
         const descriptionLower = requestData.issue_description.toLowerCase();
-        
+
         if (criticalKeywords.some(keyword => descriptionLower.includes(keyword))) {
             requestData.priority_level = 'Critical';
-        } else if (
-            highKeywords.some(keyword => descriptionLower.includes(keyword)) && 
-            requestData.priority_level !== 'Critical'
-        ) {
+        } else if (highKeywords.some(keyword => descriptionLower.includes(keyword))) {
             requestData.priority_level = 'High';
         }
         // -------------------------------------------------
-        
+
         // Pass data to repository for insertion
         const insertId = await reportRepository.createRequest(requestData);
-        return { 
-            message: 'Maintenance request created successfully', 
+        return {
+            message: 'Maintenance request created successfully',
             request_id: insertId,
-            auto_assigned_priority: requestData.priority_level 
+            auto_assigned_priority: requestData.priority_level
         };
     }
+
 
     async updateRequestStatus(requestId, status) {
         const allowedStatuses = ['Pending', 'Approved', 'Rejected', 'Assigned', 'In Progress', 'Resolved'];
