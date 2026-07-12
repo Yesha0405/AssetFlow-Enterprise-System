@@ -4,6 +4,12 @@ import DepartmentForm from "../components/DepartmentForm";
 
 function Departments() {
   const [showForm, setShowForm] = useState(false);
+  const [departments, setDepartments] = useState([]);
+
+  const handleAddDepartment = (newDepartment) => {
+    setDepartments((prev) => [newDepartment, ...prev]);
+    setShowForm(false);
+  };
 
   return (
     <div className="p-8">
@@ -25,7 +31,7 @@ function Departments() {
 
           </div>
 
-          <DepartmentTable />
+          <DepartmentTable departments={departments} />
 
         </>
       ) : (
@@ -45,7 +51,7 @@ function Departments() {
 
           </div>
 
-          <DepartmentForm />
+          <DepartmentForm onSubmit={handleAddDepartment} />
 
         </>
       )}
