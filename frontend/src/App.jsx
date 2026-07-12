@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import ReportsDashboard from './features/maintenance-audit-reports/components/ReportsDashboard';
-import Login from "./features/auth-dashboard-org/pages/login";
+import ReportsDashboard from "./features/maintenance-audit-reports/ReportsDashboard.jsx"; import Login from "./features/auth-dashboard-org/pages/login";
 import Signup from "./features/auth-dashboard-org/pages/signup";
 import Dashboard from "./features/auth-dashboard-org/pages/Dashboard";
 import Departments from "./features/auth-dashboard-org/pages/Departments";
