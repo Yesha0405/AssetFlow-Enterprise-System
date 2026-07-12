@@ -1,1 +1,163 @@
-/* This file holds all the colors, spacing, and styling for the dashboard */
+/* frontend/src/features/maintenance-audit-reports/styles/auditStyles.css */
+
+:root {
+  --primary-color: #1976d2;
+  --primary-hover: #1565c0;
+  --text-dark: #2c3e50;
+  --text-muted: #7f8c8d;
+  --bg-light: #f8f9fa;
+  --border-light: #dee2e6;
+  --border-radius: 8px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.audit-dashboard {
+  padding: 24px;
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+.audit-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.audit-dashboard-title {
+  margin: 0 0 8px 0;
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.audit-dashboard-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.btn-new-request {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.3);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-new-request:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
+}
+
+/* Table Styles */
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-light);
+  background-color: white;
+}
+
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.audit-table th {
+  padding: 16px 20px;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.audit-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+  color: #495057;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.audit-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.audit-table tbody tr:hover {
+  background-color: rgba(25, 118, 210, 0.02);
+}
+
+.audit-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Priority Badges */
+.badge-priority-critical { background-color: #ffebee; color: #c62828; }
+.badge-priority-high { background-color: #fff3e0; color: #ef6c00; }
+.badge-priority-medium { background-color: #e3f2fd; color: #1565c0; }
+.badge-priority-low { background-color: #e8f5e9; color: #2e7d32; }
+.badge-priority-default { background-color: #f5f5f5; color: #424242; }
+
+/* Status Badges */
+.badge-status-pending { background-color: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+.badge-status-assigned { background-color: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; }
+.badge-status-in-progress { background-color: #f3e5f5; color: #8e24aa; border: 1px solid #e1bee7; }
+.badge-status-resolved { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+.badge-status-approved { background-color: #e0f2f1; color: #00695c; border: 1px solid #b2dfdb; }
+.badge-status-rejected { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+.badge-status-default { background-color: #f5f5f5; color: #616161; border: 1px solid #eeeeee; }
+
+/* Truncate Description */
+.truncate-text {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Loading & Error States */
+.state-message {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+  border: 1px dashed var(--border-light);
+}
+
+.state-message-error {
+  color: #c62828;
+  border-color: #ffcdd2;
+  background-color: #fffbee;
+}

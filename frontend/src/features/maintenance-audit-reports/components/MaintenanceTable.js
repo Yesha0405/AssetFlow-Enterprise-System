@@ -1,73 +1,71 @@
 import React from 'react';
 
 const MaintenanceTable = ({ requests, isLoading, error }) => {
-    if (isLoading) return <div style={{ padding: '20px', textAlign: 'center' }}>Loading maintenance requests...</div>;
-    if (error) return <div style={{ padding: '20px', color: 'red', textAlign: 'center' }}>Error: {error}</div>;
-    if (!requests || requests.length === 0) return <div style={{ padding: '20px', textAlign: 'center' }}>No maintenance requests found.</div>;
+    if (isLoading) return <div className="state-message">Loading maintenance requests...</div>;
+    if (error) return <div className="state-message state-message-error">Error: {error}</div>;
+    if (!requests || requests.length === 0) return <div className="state-message">No maintenance requests found.</div>;
 
-    // Helper function for priority badge colors
-    const getPriorityStyle = (priority) => {
-        const styles = {
-            padding: '4px 8px',
-            borderRadius: '4px',
-            fontWeight: 'bold',
-            fontSize: '0.85em'
-        };
-        
+    // Helper function for priority CSS class
+    const getPriorityClass = (priority) => {
         switch(priority) {
-            case 'Critical':
-                return { ...styles, backgroundColor: '#ffebee', color: '#c62828' };
-            case 'High':
-                return { ...styles, backgroundColor: '#fff3e0', color: '#ef6c00' };
-            case 'Medium':
-                return { ...styles, backgroundColor: '#e3f2fd', color: '#1565c0' };
-            case 'Low':
-                return { ...styles, backgroundColor: '#e8f5e9', color: '#2e7d32' };
-            default:
-                return { ...styles, backgroundColor: '#f5f5f5', color: '#424242' };
+            case 'Critical': return 'badge badge-priority-critical';
+            case 'High': return 'badge badge-priority-high';
+            case 'Medium': return 'badge badge-priority-medium';
+            case 'Low': return 'badge badge-priority-low';
+            default: return 'badge badge-priority-default';
+        }
+    };
+
+    // Helper function for status CSS class
+    const getStatusClass = (status) => {
+        // Map database enums to CSS classes safely
+        const formattedStatus = (status || '').toLowerCase().replace(' ', '-');
+        
+        switch(formattedStatus) {
+            case 'pending': return 'badge badge-status-pending';
+            case 'assigned': return 'badge badge-status-assigned';
+            case 'in-progress': return 'badge badge-status-in-progress';
+            case 'resolved': return 'badge badge-status-resolved';
+            case 'approved': return 'badge badge-status-approved';
+            case 'rejected': return 'badge badge-status-rejected';
+            default: return 'badge badge-status-default';
         }
     };
 
     return (
-        <div className="table-container" style={{ overflowX: 'auto', marginTop: '20px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', borderRadius: '8px' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', backgroundColor: 'white' }}>
+        <div className="table-container">
+            <table className="audit-table">
                 <thead>
-                    <tr style={{ backgroundColor: '#f8f9fa', borderBottom: '2px solid #dee2e6' }}>
-                        <th style={{ padding: '12px 15px', color: '#495057' }}>ID</th>
-                        <th style={{ padding: '12px 15px', color: '#495057' }}>Asset ID</th>
-                        <th style={{ padding: '12px 15px', color: '#495057' }}>Requested By</th>
-                        <th style={{ padding: '12px 15px', color: '#495057' }}>Issue Description</th>
-                        <th style={{ padding: '12px 15px', color: '#495057' }}>Priority</th>
-                        <th style={{ padding: '12px 15px', color: '#495057' }}>Status</th>
-                        <th style={{ padding: '12px 15px', color: '#495057' }}>Created At</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>Asset ID</th>
+                        <th>Requested By</th>
+                        <th>Issue Description</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Created At</th>
                     </tr>
                 </thead>
                 <tbody>
                     {requests.map((req) => (
-                        <tr key={req.request_id} style={{ borderBottom: '1px solid #eee' }}>
-                            <td style={{ padding: '12px 15px' }}>#{req.request_id}</td>
-                            <td style={{ padding: '12px 15px' }}>{req.asset_id}</td>
-                            <td style={{ padding: '12px 15px' }}>{req.requested_by}</td>
-                            <td style={{ padding: '12px 15px', maxWidth: '300px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <tr key={req.request_id}>
+                            <td>#{req.request_id}</td>
+                            <td>{req.asset_id}</td>
+                            <td>{req.requested_by}</td>
+                            <td className="truncate-text" title={req.issue_description}>
                                 {req.issue_description}
                             </td>
-                            <td style={{ padding: '12px 15px' }}>
-                                <span style={getPriorityStyle(req.priority_level)}>
+                            <td>
+                                <span className={getPriorityClass(req.priority_level)}>
                                     {req.priority_level}
                                 </span>
                             </td>
-                            <td style={{ padding: '12px 15px' }}>
-                                <span style={{ 
-                                    padding: '4px 8px', 
-                                    borderRadius: '12px', 
-                                    backgroundColor: req.status === 'Resolved' ? '#e8f5e9' : '#f5f5f5',
-                                    border: '1px solid #ddd',
-                                    fontSize: '0.85em'
-                                }}>
+                            <td>
+                                <span className={getStatusClass(req.status)}>
                                     {req.status}
                                 </span>
                             </td>
-                            <td style={{ padding: '12px 15px' }}>{new Date(req.created_at).toLocaleDateString()}</td>
+                            <td>{new Date(req.created_at).toLocaleDateString()}</td>
                         </tr>
                     ))}
                 </tbody>
