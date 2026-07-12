@@ -1,2 +1,1 @@
--- AssetFlow database schema placeholder
--- Add your SQL schema here.
+-- Placeholder main database schema

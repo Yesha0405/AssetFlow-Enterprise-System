@@ -1,2 +1,1 @@
--- AssetFlow seed data placeholder
--- Add initial seed data here.
+-- Placeholder seed data

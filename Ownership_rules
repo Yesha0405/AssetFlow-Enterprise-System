@@ -1,0 +1,218 @@
+## Member 1
+
+IMPORTANT DEVELOPMENT RULES
+
+You are working as Member 1 in a team of four developers.
+
+Generate code ONLY inside these folders:
+
+Frontend:
+frontend/src/features/auth-dashboard-org/
+
+Backend:
+backend/src/features/auth-dashboard-org/
+
+You MAY use:
+frontend/src/context/
+frontend/src/routes/
+
+If you need reusable UI components, place them inside:
+frontend/src/shared/components/
+
+If you need layouts, place them inside:
+frontend/src/shared/layouts/
+
+If you need custom hooks, place them inside:
+frontend/src/shared/hooks/
+
+If you need utility/helper functions, place them inside:
+frontend/src/shared/utils/
+
+If you need API service files, place them inside:
+frontend/src/shared/api/
+
+DO NOT modify:
+
+frontend/src/App.jsx
+frontend/src/main.jsx
+backend/src/server.js
+
+DO NOT create duplicate folders.
+
+DO NOT modify another member's feature folder.
+
+Assume the rest of the project already exists.
+
+Only generate files related to:
+- Authentication
+- Dashboard
+- Organization Setup
+- Departments
+- Categories
+- Employee Directory
+
+Keep the code modular and integration-friendly.
+
+
+## Member 2
+IMPORTANT DEVELOPMENT RULES
+
+You are working as Member 2 in a team of four developers.
+
+Generate code ONLY inside these folders:
+
+Frontend:
+frontend/src/features/asset-management/
+
+Backend:
+backend/src/features/asset-management/
+
+If you need reusable UI components, place them inside:
+frontend/src/shared/components/
+
+If you need layouts, place them inside:
+frontend/src/shared/layouts/
+
+If you need custom hooks, place them inside:
+frontend/src/shared/hooks/
+
+If you need utility/helper functions, place them inside:
+frontend/src/shared/utils/
+
+If you need API service files, place them inside:
+frontend/src/shared/api/
+
+DO NOT modify:
+
+frontend/src/App.jsx
+frontend/src/main.jsx
+backend/src/server.js
+
+DO NOT modify any Authentication files.
+
+DO NOT modify Allocation.
+
+DO NOT modify Maintenance.
+
+DO NOT create duplicate folders.
+
+Assume the remaining project already exists.
+
+Only generate files related to:
+- Asset Registration
+- Asset Directory
+- Asset Details
+- Asset History
+- Asset Status
+- Search
+- Filters
+
+Keep everything modular.
+
+## Member 3
+IMPORTANT DEVELOPMENT RULES
+
+You are working as Member 3 in a team of four developers.
+
+Generate code ONLY inside these folders:
+
+Frontend:
+frontend/src/features/allocation-booking/
+
+Backend:
+backend/src/features/allocation-booking/
+
+If you need reusable UI components, place them inside:
+frontend/src/shared/components/
+
+If you need layouts, place them inside:
+frontend/src/shared/layouts/
+
+If you need custom hooks, place them inside:
+frontend/src/shared/hooks/
+
+If you need utility/helper functions, place them inside:
+frontend/src/shared/utils/
+
+If you need API service files, place them inside:
+frontend/src/shared/api/
+
+DO NOT modify:
+
+frontend/src/App.jsx
+frontend/src/main.jsx
+backend/src/server.js
+
+DO NOT modify Authentication.
+
+DO NOT modify Asset Management.
+
+DO NOT modify Maintenance.
+
+DO NOT create duplicate folders.
+
+Assume the remaining project already exists.
+
+Only generate files related to:
+- Asset Allocation
+- Transfer Request
+- Asset Return
+- Resource Booking
+- Booking Calendar
+- Conflict Validation
+
+Keep everything modular.
+
+## Member 4
+IMPORTANT DEVELOPMENT RULES
+
+You are working as Member 4 in a team of four developers.
+
+Generate code ONLY inside these folders:
+
+Frontend:
+frontend/src/features/maintenance-audit-reports/
+
+Backend:
+backend/src/features/maintenance-audit-reports/
+
+If you need reusable UI components, place them inside:
+frontend/src/shared/components/
+
+If you need layouts, place them inside:
+frontend/src/shared/layouts/
+
+If you need custom hooks, place them inside:
+frontend/src/shared/hooks/
+
+If you need utility/helper functions, place them inside:
+frontend/src/shared/utils/
+
+If you need API service files, place them inside:
+frontend/src/shared/api/
+
+DO NOT modify:
+
+frontend/src/App.jsx
+frontend/src/main.jsx
+backend/src/server.js
+
+DO NOT modify Authentication.
+
+DO NOT modify Asset Management.
+
+DO NOT modify Allocation.
+
+DO NOT create duplicate folders.
+
+Assume the remaining project already exists.
+
+Only generate files related to:
+- Maintenance Workflow
+- Asset Audit
+- Reports
+- Analytics
+- Notifications
+- Activity Logs
+
+Keep everything modular.
