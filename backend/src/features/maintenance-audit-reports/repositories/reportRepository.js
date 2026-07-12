@@ -50,6 +50,28 @@ class ReportRepository {
         const [result] = await db.execute(query, [lifecycleStatus, requestId]);
         return result.affectedRows;
     }
+
+    async getMaintenanceFrequency() {
+        const query = `
+            SELECT DATE_FORMAT(created_at, '%Y-%m') AS month, COUNT(*) AS count
+            FROM Maintenance_Requests
+            GROUP BY month
+            ORDER BY month ASC
+        `;
+        const [rows] = await db.execute(query);
+        return rows;
+    }
+
+    async getAtRiskAssets() {
+        // Fetching assets flagged with 'Critical' maintenance status
+        const query = `
+            SELECT request_id, asset_id, issue_description, priority_level, status, created_at
+            FROM Maintenance_Requests
+            WHERE priority_level = 'Critical' AND status NOT IN ('Resolved', 'Rejected')
+        `;
+        const [rows] = await db.execute(query);
+        return rows;
+    }
 }
 
 module.exports = new ReportRepository();

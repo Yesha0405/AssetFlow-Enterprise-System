@@ -54,6 +54,16 @@ class ReportService {
 
         return { message: 'Status updated successfully', request_id: requestId, new_status: status };
     }
+
+    async getAnalytics() {
+        const maintenanceFrequency = await reportRepository.getMaintenanceFrequency();
+        const atRiskAssets = await reportRepository.getAtRiskAssets();
+        
+        return {
+            maintenanceFrequency,
+            atRiskAssets
+        };
+    }
 }
 
 module.exports = new ReportService();
