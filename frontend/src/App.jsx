@@ -1,47 +1,64 @@
-import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+
 import Login from "./features/auth-dashboard-org/pages/login";
 import Signup from "./features/auth-dashboard-org/pages/signup";
 import Dashboard from "./features/auth-dashboard-org/pages/Dashboard";
 import Departments from "./features/auth-dashboard-org/pages/Departments";
-import { getCurrentUser } from "./features/auth-dashboard-org/services/authService";
+import Categories from "./features/auth-dashboard-org/pages/Categories";
+import Employees from "./features/auth-dashboard-org/pages/Employees";
+import { getCurrentUser, logoutUser } from "./features/auth-dashboard-org/services/authService";
 
 function App() {
-  const [view, setView] = useState(() => (getCurrentUser() ? "dashboard" : "login"));
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (getCurrentUser()) {
-      setView("dashboard");
-    }
-  }, []);
-
-  const renderHomePage = () => {
-    if (view === "signup") {
-      return (
-        <Signup
-          onSwitchToLogin={() => setView("login")}
-          onSignupSuccess={() => setView("dashboard")}
-        />
-      );
-    }
-
-    if (view === "dashboard") {
-      return <Dashboard onLogout={() => setView("login")} />;
-    }
-
-    return (
-      <Login
-        onSwitchToSignup={() => setView("signup")}
-        onLoginSuccess={() => setView("dashboard")}
-      />
-    );
-  };
+  const currentUser = getCurrentUser();
 
   return (
     <div className="min-h-screen bg-slate-50">
       <Routes>
-        <Route path="/" element={renderHomePage()} />
+
+        <Route
+          path="/"
+          element={
+            currentUser ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <Login
+                onSwitchToSignup={() => navigate("/signup")}
+                onLoginSuccess={() => navigate("/dashboard")}
+              />
+            )
+          }
+        />
+
+        <Route
+          path="/signup"
+          element={
+            <Signup
+              onSwitchToLogin={() => navigate("/")}
+              onSignupSuccess={() => navigate("/dashboard")}
+            />
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <Dashboard
+              onLogout={() => {
+                logoutUser();
+                navigate("/");
+              }}
+            />
+          }
+        />
+
         <Route path="/departments" element={<Departments />} />
+
+        <Route path="/categories" element={<Categories />} />
+
+        <Route path="/employees" element={<Employees />} />
+
       </Routes>
     </div>
   );
