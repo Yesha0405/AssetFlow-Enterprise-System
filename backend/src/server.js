@@ -1,3 +1,4 @@
+// Placeholder backend entry file
 require("dotenv").config();
 
 const express = require("express");
@@ -7,10 +8,14 @@ const db = require("./config/db");
 
 // Asset Management
 const assetRoutes = require("./features/asset-management/routes");
+// Allocation Booking
+const allocationRoutes = require("./features/allocation-booking/routes/allocation.routes");
+const bookingRoutes = require("./features/allocation-booking/routes/booking.routes");
+const transferRoutes = require("./features/allocation-booking/routes/transfer.routes");
+const returnRoutes = require("./features/allocation-booking/routes/return.routes");
 
 // Future Modules
 // const authRoutes = require("./features/auth-dashboard-org/routes");
-// const allocationRoutes = require("./features/allocation-booking/routes");
 // const maintenanceRoutes = require("./features/maintenance-audit-reports/routes");
 
 const app = express();
@@ -43,11 +48,14 @@ app.get("/", (req, res) => {
 // ==========================
 
 app.use("/api/assets", assetRoutes(db));
-
+// Allocation Booking APIs
+app.use("/api/allocations", allocationRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/transfers", transferRoutes);
+app.use("/api/returns", returnRoutes);
 // Future Routes
 
 // app.use("/api/auth", authRoutes(db));
-// app.use("/api/allocation", allocationRoutes(db));
 // app.use("/api/maintenance", maintenanceRoutes(db));
 
 // ==========================
