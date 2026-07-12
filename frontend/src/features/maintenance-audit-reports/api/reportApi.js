@@ -23,3 +23,13 @@ export const createMaintenanceRequest = async (requestData) => {
         throw error;
     }
 };
+
+export const updateRequestStatus = async (id, status) => {
+    try {
+        const response = await axios.patch(`${API_BASE_URL}/maintenance-requests/${id}/status`, { status });
+        return response.data;
+    } catch (error) {
+        console.error("Error updating status:", error);
+        throw error;
+    }
+};

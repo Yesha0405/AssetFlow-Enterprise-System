@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MaintenanceTable = ({ requests, isLoading, error }) => {
+const MaintenanceTable = ({ requests, isLoading, error, onStatusChange }) => {
     if (isLoading) return <div className="state-message">Loading maintenance requests...</div>;
     if (error) return <div className="state-message state-message-error">Error: {error}</div>;
     if (!requests || requests.length === 0) return <div className="state-message">No maintenance requests found.</div>;
@@ -32,6 +32,8 @@ const MaintenanceTable = ({ requests, isLoading, error }) => {
         }
     };
 
+    const statusOptions = ['Pending', 'Approved', 'Rejected', 'Assigned', 'In Progress', 'Resolved'];
+
     return (
         <div className="table-container">
             <table className="audit-table">
@@ -61,9 +63,15 @@ const MaintenanceTable = ({ requests, isLoading, error }) => {
                                 </span>
                             </td>
                             <td>
-                                <span className={getStatusClass(req.status)}>
-                                    {req.status}
-                                </span>
+                                <select 
+                                    className={`status-select ${getStatusClass(req.status)}`}
+                                    value={req.status}
+                                    onChange={(e) => onStatusChange && onStatusChange(req.request_id, e.target.value)}
+                                >
+                                    {statusOptions.map(opt => (
+                                        <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                </select>
                             </td>
                             <td>{new Date(req.created_at).toLocaleDateString()}</td>
                         </tr>

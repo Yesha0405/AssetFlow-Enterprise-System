@@ -24,6 +24,17 @@ class ReportController {
             }
         }
     }
+    async updateStatus(req, res) {
+        try {
+            const { id } = req.params;
+            const { status } = req.body;
+            const result = await reportService.updateRequestStatus(id, status);
+            res.status(200).json(result);
+        } catch (error) {
+            console.error('Error updating status:', error);
+            res.status(error.message.includes('Invalid status') ? 400 : 500).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = new ReportController();

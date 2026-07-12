@@ -35,6 +35,11 @@ class ReportRepository {
         const [result] = await db.execute(query, values);
         return result.insertId;
     }
+    async updateRequestStatus(requestId, status) {
+        const query = `UPDATE Maintenance_Requests SET status = ? WHERE request_id = ?`;
+        const [result] = await db.execute(query, [status, requestId]);
+        return result.affectedRows;
+    }
 }
 
 module.exports = new ReportRepository();

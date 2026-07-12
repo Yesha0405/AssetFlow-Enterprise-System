@@ -10,4 +10,8 @@ router.get('/maintenance-requests', reportController.getAllRequests);
 // Create a new maintenance request
 router.post('/maintenance-requests', reportController.createRequest);
 
+// PATCH /api/reports/maintenance-requests/:id/status
+// Update a maintenance request status
+router.patch('/maintenance-requests/:id/status', reportController.updateStatus);
+
 module.exports = router;
