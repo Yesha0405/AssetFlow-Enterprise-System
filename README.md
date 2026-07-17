@@ -1,6 +1,6 @@
 # AssetFlow – Enterprise Asset & Resource Management System
 
-This repository now uses one clear main structure for the hackathon team.
+This repository is for Oddo Hackhathon.
 
 ## Team Ownership
 
